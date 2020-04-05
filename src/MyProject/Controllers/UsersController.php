@@ -9,16 +9,8 @@ use MyProject\Services\EmailSender;
 use MyProject\Services\UsersAuthService;
 use MyProject\Models\Users\UserActivationService;
 
-class UsersController
+class UsersController extends AbstractController
 {
-    /** @var View */
-    private $view;
-
-    public function __construct()
-    {
-        $this->view = new View(__DIR__ . '/../../templates');
-    }
-
     public function signUp()
     {
         if (!empty($_POST)) {
