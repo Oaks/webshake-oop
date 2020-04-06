@@ -8,6 +8,7 @@ use MyProject\Models\Articles\Article;
 use MyProject\Models\Users\User;
 use MyProject\Exceptions\NotFoundException;
 use MyProject\Exceptions\UnauthorizedException;
+use MyProject\Exceptions\InvalidArgumentException;
 
 class ArticlesController extends AbstractController
 {
@@ -38,8 +39,20 @@ class ArticlesController extends AbstractController
 
     public function add(): void
     {
-        if ( $this->user === null ) {
+        if ($this->user === null) {
             throw new UnauthorizedException();
+        }
+
+        if (!empty($_POST)) {
+            try {
+                $article = Article::createFromArray($_POST, $this->user);
+            } catch (InvalidArgumentException $e) {
+                $this->view->renderHtml('articles/add.php', ['error' => $e->getMessage()]);
+                return;
+            }
+
+            header('Location: /articles/' . $article->getId(), true, 302);
+            exit();
         }
 
         $this->view->renderHtml('articles/add.php');
