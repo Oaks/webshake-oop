@@ -7,6 +7,7 @@ use MyProject\View\View;
 use MyProject\Models\Articles\Article;
 use MyProject\Models\Users\User;
 use MyProject\Exceptions\NotFoundException;
+use MyProject\Exceptions\UnauthorizedException;
 
 class ArticlesController extends AbstractController
 {
@@ -37,15 +38,10 @@ class ArticlesController extends AbstractController
 
     public function add(): void
     {
-        $author = User::getById(1);
+        if ( $this->user === null ) {
+            throw new UnauthorizedException();
+        }
 
-        $article = new Article();
-        $article->setAuthor($author);
-        $article->setName('Новое название статьи');
-        $article->setText('Новый текст статьи');
-
-        $article->save();
-
-        var_dump($article);
-}
+        $this->view->renderHtml('articles/add.php');
+    }
 }

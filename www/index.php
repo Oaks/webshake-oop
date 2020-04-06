@@ -40,4 +40,7 @@ try {
 } catch (\MyProject\Exceptions\MailException $e) {
     $view = new MyProject\View\View(__DIR__ . '/../src/templates/errors');
     $view->renderHtml('500.php', ['error' => $e->getMessage()], 500);
+} catch (\MyProject\Exceptions\UnauthorizedException $e) {
+    $view = new \MyProject\View\View(__DIR__ . '/../src/templates/errors');
+    $view->renderHtml('401.php', ['error' => $e->getMessage()], 401);
 }
