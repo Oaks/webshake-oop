@@ -1,0 +1,17 @@
+{
+    "name": "sergey/webshake-oop",
+    "authors": [
+        {
+            "name": "Sergey Tvarnov",
+            "email": "bropstk@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "MyProject\\": "src/MyProject/"
+        }
+    },
+    "require": {
+        "erusev/parsedown": "^1.7"
+    }
+}
