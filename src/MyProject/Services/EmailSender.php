@@ -26,7 +26,7 @@ class EmailSender
         extract($templateVars);
 
         ob_start();
-        require __DIR__ . '/../../templates/mail/' . $templateName;
+        require __DIR__ . '/../../../templates/mail/' . $templateName;
         $body = ob_get_contents();
         ob_end_clean();
 
