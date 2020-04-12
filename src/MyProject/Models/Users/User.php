@@ -13,7 +13,7 @@ class User extends ActiveRecordEntity
     /** @var string */
     protected $email;
 
-    /** @var int */
+    /** @var bool */
     protected $isConfirmed;
 
     /** @var string */
@@ -118,6 +118,7 @@ class User extends ActiveRecordEntity
             throw new InvalidArgumentException('Не передан password');
         }
 
+        /** @var User $user */
         $user = User::findOneByColumn('email', $loginData['email']);
         if ($user === null) {
             throw new InvalidArgumentException('Нет пользователя с таким email');

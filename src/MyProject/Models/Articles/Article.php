@@ -14,7 +14,7 @@ class Article extends ActiveRecordEntity
     /** @var string */
     protected $text;
 
-    /** @var string */
+    /** @var int */
     protected $authorId;
 
     /** @var string */
@@ -54,7 +54,7 @@ class Article extends ActiveRecordEntity
     /**
      * @return User
      */
-    public function getAuthor(): User
+    public function getAuthor(): ?User
     {
         return User::getById($this->authorId);
     }

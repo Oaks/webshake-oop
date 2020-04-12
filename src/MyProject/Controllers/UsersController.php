@@ -21,17 +21,15 @@ class UsersController extends AbstractController
                 return;
             }
 
-            if ($user instanceof User) {
-                $code = UserActivationService::createActivationCode($user);
+            $code = UserActivationService::createActivationCode($user);
 
-                EmailSender::send($user, 'Активация', 'userActivation.php', [
-                    'userId' => $user->getId(),
-                    'code' => $code
-                ]);
+            EmailSender::send($user, 'Активация', 'userActivation.php', [
+                'userId' => $user->getId(),
+                'code' => $code
+            ]);
 
-                $this->view->renderHtml('users/signUpSuccessful.php');
-                return;
-            }
+            $this->view->renderHtml('users/signUpSuccessful.php');
+            return;
         }
 
         $this->view->renderHtml('users/signUp.php');
