@@ -13,5 +13,11 @@
     },
     "require": {
         "erusev/parsedown": "^1.7"
+    },
+    "require-dev": {
+        "vimeo/psalm": "^3.10"
+    },
+    "scripts": {
+        "psalm": "psalm"
     }
 }
