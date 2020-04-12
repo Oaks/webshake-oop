@@ -8,6 +8,7 @@ use MyProject\Models\Articles\Article;
 use MyProject\Models\Users\User;
 use MyProject\Exceptions\NotFoundException;
 use MyProject\Exceptions\UnauthorizedException;
+use MyProject\Exceptions\AdminException;
 use MyProject\Exceptions\InvalidArgumentException;
 
 class ArticlesController extends AbstractController
@@ -73,6 +74,14 @@ class ArticlesController extends AbstractController
 
     public function delete(int $articleId)
     {
+        if ($this->user === null) {
+            throw new UnauthorizedException();
+        }
+
+        if (!$this->user->isAdmin() ) {
+            throw new AdminException("У вас нет прав администратора");
+        }
+
         $article = Article::getById($articleId);
 
         if ($article === null) {

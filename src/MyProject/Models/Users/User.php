@@ -44,6 +44,21 @@ class User extends ActiveRecordEntity
         return $this->email;
     }
 
+    /**
+     * @return string
+     */
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role == 'admin';
+    }
     protected static function getTableName(): string
     {
         return 'users';
