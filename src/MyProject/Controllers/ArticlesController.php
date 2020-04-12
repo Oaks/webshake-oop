@@ -70,4 +70,19 @@ class ArticlesController extends AbstractController
 
         $this->view->renderHtml('articles/add.php');
     }
+
+    public function delete(int $articleId)
+    {
+        $article = Article::getById($articleId);
+
+        if ($article === null) {
+            throw new NotFoundException();
+        }
+
+        $article->delete();
+
+        header('Location: /' , true);
+        exit();
+    }
+    
 }
