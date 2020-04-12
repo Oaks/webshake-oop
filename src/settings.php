@@ -6,5 +6,6 @@ return [
         'dbname' => 'my_project',
         'user' => 'webshake',
         'password' => 'secret',
-    ]
+    ],
+    'templates' => __DIR__ . '/../templates'
 ];

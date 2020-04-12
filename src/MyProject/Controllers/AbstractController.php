@@ -17,7 +17,9 @@ abstract class AbstractController
     public function __construct()
     {
         $this->user = UsersAuthService::getUserByToken();
-        $this->view = new View(__DIR__ . '/../../../templates');
+
+        $templates = (require __DIR__ . '/../../settings.php')['templates'];
+        $this->view = new View($templates);
         $this->view->setVar('user', $this->user);
     }
 }
