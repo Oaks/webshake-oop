@@ -41,7 +41,9 @@ class UsersController extends AbstractController
         $isCodeValid = UserActivationService::checkActivationCode($user, $activationCode);
         if ($isCodeValid) {
             $user->activate();
-            echo 'OK!';
+            $this->view->renderHtml('users/ActivationSuccessful.php');
+        } else {
+            $this->view->renderHtml('users/ActivationFail.php');
         }
     }
 
