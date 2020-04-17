@@ -2,6 +2,7 @@
 
 namespace MyProject\Controllers;
 
+use MyProject\Models\Articles\Comment;
 use MyProject\Services\Db;
 use MyProject\View\View;
 use MyProject\Models\Articles\Article;
@@ -10,6 +11,7 @@ use MyProject\Exceptions\NotFoundException;
 use MyProject\Exceptions\UnauthorizedException;
 use MyProject\Exceptions\AdminException;
 use MyProject\Exceptions\InvalidArgumentException;
+use ReflectionClass;
 
 class ArticlesController extends AbstractController
 {
@@ -21,7 +23,7 @@ class ArticlesController extends AbstractController
             throw new NotFoundException();
         }
 
-        $this->view->renderHtml('articles/view.php', ['article' => $article]);
+        $this->view->renderHtml('articles/view.php', [ 'article' => $article ]);
     }
 
     public function edit(int $articleId)
@@ -93,5 +95,39 @@ class ArticlesController extends AbstractController
         header('Location: /' , true);
         exit();
     }
-    
+
+    public function comments(int $articleId) {
+        if ($_POST) {
+            $article = Article::getById($articleId);
+
+            if ($article === null) {
+                throw new NotFoundException();
+            }
+
+            if ($this->user === null) {
+                throw new UnauthorizedException();
+            }
+            /* $this->user = new User(); */
+            /* $reflectionClass = new ReflectionClass('MyProject\Models\Users\User'); */
+            /* $property = $reflectionClass->getProperty('id'); */
+            /* $property->setAccessible(true); */
+            /* $property->setValue($this->user, 1); */
+
+            try {
+                $comment = Comment::create($_POST, $article, $this->user);
+            } catch(InvalidArgumentException $e) {
+                $this->view->renderHtml("articles/view.php", [
+                    'error' => $e->getMessage(),
+                    'article' => $article
+                ]);
+
+                return;
+            }
+            header("Location: " . "/articles/{$article->getId()}/#comment_{$comment->getId()}");
+            exit();
+        }
+
+        http_response_code(405);
+    }
+
 }

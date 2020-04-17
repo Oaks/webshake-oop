@@ -6,4 +6,5 @@
     <?php if (!empty($user) && $user->isAdmin() ) {?>
         <a href="/articles/<?=$article->getId() ?>/delete">Delete</a>
     <?php }?>
+<?php include __DIR__ . '/_comments.php'; ?>
 <?php include __DIR__ . '/../footer.php'; ?>

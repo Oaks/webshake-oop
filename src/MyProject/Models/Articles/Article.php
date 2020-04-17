@@ -59,6 +59,14 @@ class Article extends ActiveRecordEntity
         return User::getById($this->authorId);
     }
 
+    /**
+     * @return array
+     */
+    public function getComments(): ?array
+    {
+        return Comment::findAllByColumn('article_id', $this->getId());
+    }
+
     protected static function getTableName(): string
     {
         return 'articles';
