@@ -15,7 +15,11 @@
     </tr>
     <tr>
         <td colspan="2" style="text-align: right">
-            <?= !empty($user) ? 'Привет, ' . $user->getNickname() . '(' . $user->getRole() . ')': 'Войдите на сайт' ?>
+            <?php if (!empty($user)) {?>
+                <p> <?="Привет, {$user->getNickname()}({$user->getRole()})" ?></p>
+            <?php } else {?>
+                 <a href="/users/login">Войдите на сайт</a>
+            <?php } ?>
         </td>
     </tr>
     <tr>
