@@ -19,7 +19,10 @@
             <?php foreach ($comments as $comment) { ?>
                 <?php $author = $comment->getAuthor() ?>
                 <div><?= !empty($author) ? $author->getNickname() : '' ?></div>
-                <div id=<?="comment_{$comment->getId()}"?> ><?=$comment->getComment()?></div>
+                <div id=<?="\"comment_{$comment->getId()}\""?> ><?=$comment->getComment()?></div>
+                <?php if (!empty($user) && ($comment->isCommentator($user) || $user->isAdmin()) ) {?>
+                    <a href=<?="\"/comments/{$comment->getId()}/edit\""?>>Edit</a>
+                <?php }?>
                 <hr>
             <?php } ?>
         <?php }?>

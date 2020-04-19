@@ -96,7 +96,7 @@ class ArticlesController extends AbstractController
         exit();
     }
 
-    public function comments(int $articleId) {
+    public function addComment(int $articleId) {
         if ($_POST) {
             $article = Article::getById($articleId);
 
@@ -107,11 +107,6 @@ class ArticlesController extends AbstractController
             if ($this->user === null) {
                 throw new UnauthorizedException();
             }
-            /* $this->user = new User(); */
-            /* $reflectionClass = new ReflectionClass('MyProject\Models\Users\User'); */
-            /* $property = $reflectionClass->getProperty('id'); */
-            /* $property->setAccessible(true); */
-            /* $property->setValue($this->user, 1); */
 
             try {
                 $comment = Comment::create($_POST, $article, $this->user);

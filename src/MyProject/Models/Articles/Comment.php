@@ -48,6 +48,11 @@ class Comment extends ActiveRecordEntity
         $this->articleId = $article->getId();
     }
 
+    public function getArticle() :?Article
+    {
+        return Article::getById($this->articleId);
+    }
+
     protected static function getTableName(): string
     {
         return 'comments';
@@ -67,5 +72,21 @@ class Comment extends ActiveRecordEntity
         $comment->save();
 
         return $comment;
+    }
+
+    public function update(array $fields): Comment
+    {
+        if (empty($fields['comment'])) {
+            throw new InvalidArgumentException('Не передан текст комментария');
+        }
+
+        $this->setComment($fields['comment']);
+        $this->save();
+
+        return $this;
+    }
+    
+    public function isCommentator(User $user): bool {
+        return (int)$this->authorId === $user->getId();
     }
 }

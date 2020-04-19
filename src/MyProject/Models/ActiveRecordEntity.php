@@ -14,7 +14,7 @@ abstract class ActiveRecordEntity
      */
     public function getId(): int
     {
-        return $this->id;
+        return (int)$this->id;
     }
 
     public function __set(string $name, $value)
