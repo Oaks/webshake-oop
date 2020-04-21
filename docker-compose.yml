@@ -21,10 +21,12 @@ services:
             DB_HOST: db
             DB_NAME: my_project
             DB_USER: webshake
-            DB_PASSWORD: secret
+            DB_PASSWORD: ${MYSQL_PASSWORD}
+
             MAILER_USER: ${MAILER_USER}
             MAILER_PASSWORD: ${MAILER_PASSWORD}
             MAILER_FROM_EMAIL: mail@app.test
+
             FRONTEND_URL: http://localhost:8080
         depends_on:
             - db
@@ -35,8 +37,8 @@ services:
         environment:
             MYSQL_DATABASE: my_project
             MYSQL_USER: webshake
-            MYSQL_PASSWORD: secret
-            MYSQL_ROOT_PASSWORD: secret
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
         volumes:
             - dbdata:/var/lib/mysql
             - ./data:/app
