@@ -15,7 +15,8 @@
         "erusev/parsedown": "^1.7"
     },
     "require-dev": {
-        "vimeo/psalm": "^3.10"
+        "vimeo/psalm": "^3.10",
+        "fzaninotto/faker": "^1.9"
     },
     "scripts": {
         "psalm": "psalm"
