@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS `users_activation_codes`;
+
 CREATE TABLE `users_activation_codes` (
       `id` int(11) NOT NULL,
       `user_id` int(11) NOT NULL,

@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS `comments`;
+
 CREATE TABLE `comments` (
       `id` int(11) NOT NULL,
       `author_id` int(11) NOT NULL,
@@ -12,5 +14,3 @@ ALTER TABLE `comments`
 ALTER TABLE `comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-INSERT INTO `comments` (`id`, `author_id`, `article_id`, `comment`, `created_at`) VALUES (NULL, '1', '4', 'Шёл я значит по тротуару, как вдруг...', CURRENT_TIMESTAMP);
-INSERT INTO `comments` (`id`, `author_id`, `article_id`, `comment`, `created_at`) VALUES (NULL, '3', '4', 'Короновирус ....', CURRENT_TIMESTAMP);
