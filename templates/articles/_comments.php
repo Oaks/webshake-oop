@@ -18,7 +18,9 @@
         <?php if (!empty($comments)) {?>
             <?php foreach ($comments as $comment) { ?>
                 <?php $author = $comment->getAuthor() ?>
-                <div><?= !empty($author) ? $author->getNickname() : '' ?></div>
+                <?php if (!empty($author))  {?>
+                    <div><?= "{$comment->getCreatedAt()} {$author->getNickname()}" ?></div>
+                <?php }?>
                 <div id=<?="\"comment_{$comment->getId()}\""?> ><?=$comment->getComment()?></div>
                 <?php if (!empty($user) && ($comment->isCommentator($user) || $user->isAdmin()) ) {?>
                     <a href=<?="\"/comments/{$comment->getId()}/edit\""?>>Edit</a>

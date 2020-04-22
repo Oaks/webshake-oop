@@ -18,7 +18,8 @@
             <?php if (!empty($user)) {?>
                 <p> <?="Привет, {$user->getNickname()}({$user->getRole()})" ?></p>
             <?php } else {?>
-                 <a href="/users/login">Войдите на сайт</a>
+            <div><a href="/users/register">Регистрация</a></div>
+             <div><a href="/users/login">Войдите на сайт</a></div>
             <?php } ?>
         </td>
     </tr>

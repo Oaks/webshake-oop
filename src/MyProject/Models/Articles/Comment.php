@@ -58,6 +58,11 @@ class Comment extends ActiveRecordEntity
         return 'comments';
     }
 
+    public function getCreatedAt(): string
+    {
+        return $this->createdAt;
+    }
+
     public static function create(array $fields, Article $article, User $author): Comment
     {
         if (empty($fields['comment'])) {
