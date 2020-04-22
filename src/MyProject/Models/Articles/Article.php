@@ -67,6 +67,14 @@ class Article extends ActiveRecordEntity
         return Comment::findAllByColumn('article_id', $this->getId());
     }
 
+    /**
+     * @return string
+     */
+    public function getCreatedAt(): string
+    {
+        return $this->createdAt;
+    }
+
     protected static function getTableName(): string
     {
         return 'articles';

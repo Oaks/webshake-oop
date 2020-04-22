@@ -53,6 +53,14 @@ class User extends ActiveRecordEntity
     }
 
     /**
+     * @return string
+     */
+    public function getCreatedAt(): string
+    {
+        return $this->createdAt;
+    }
+
+    /**
      * @return bool
      */
     public function isAdmin(): bool
