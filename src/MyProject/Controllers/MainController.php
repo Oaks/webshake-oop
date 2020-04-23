@@ -2,11 +2,14 @@
 
 namespace MyProject\Controllers;
 
+use MyProject\Services\Logger;
 use MyProject\View\View;
 use MyProject\Models\Articles\Article;
 
 class MainController extends AbstractController
 {
+    use Logger;
+    
     public function main()
     {
         $articles = Article::findAll();
