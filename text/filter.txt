@@ -1,0 +1,11 @@
+It's a common misconception that user input can be filtered. PHP even has a (now deprecated) "feature", called magic-quotes, that builds on this idea. It's nonsense. Forget about filtering (or cleaning, or whatever people call it).
+
+What you should do, to avoid problems, is quite simple: whenever you embed a string within foreign code, you must escape it, according to the rules of that language. For example, if you embed a string in some SQL targeting MySQL, you must escape the string with MySQL's function for this purpose (mysqli_real_escape_string). (Or, in case of databases, using prepared statements are a better approach, when possible.)
+
+Another example is HTML: If you embed strings within HTML markup, you must escape it with htmlspecialchars. This means that every single echo or print statement should use htmlspecialchars.
+
+A third example could be shell commands: If you are going to embed strings (such as arguments) to external commands, and call them with exec, then you must use escapeshellcmd and escapeshellarg.
+
+And so on and so forth ...
+
+The only case where you need to actively filter data, is if you're accepting preformatted input. For example, if you let your users post HTML markup, that you plan to display on the site. However, you should be wise to avoid this at all cost, since no matter how well you filter it, it will always be a potential security hole.
