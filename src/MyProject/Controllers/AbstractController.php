@@ -3,11 +3,14 @@
 namespace MyProject\Controllers;
 
 use MyProject\Models\Users\User;
+use MyProject\Services\Logger;
 use MyProject\Services\UsersAuthService;
 use MyProject\View\View;
 
 abstract class AbstractController
 {
+    use Logger;
+
     /** @var View */
     protected $view;
 
