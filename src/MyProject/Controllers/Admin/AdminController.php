@@ -8,6 +8,7 @@ class AdminController extends AbstractController
 {
     public function index()
     {
-        $this->log("Admin");
+        /* $this->log($this->templates); */
+        echo file_get_contents($this->templates . '/admin/layouts/starter.html');
     }
 }

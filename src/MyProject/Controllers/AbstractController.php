@@ -17,11 +17,14 @@ abstract class AbstractController
     /** @var User|null */
     protected $user;
 
+    protected $templates;
+
     public function __construct()
     {
         $this->user = UsersAuthService::getUserByToken();
 
         $templates = (require __DIR__ . '/../../settings.php')['templates'];
+        $this->templates = $templates;
         $this->view = new View($templates);
         $this->view->setVar('user', $this->user);
     }
