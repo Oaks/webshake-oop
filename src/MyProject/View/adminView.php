@@ -8,24 +8,30 @@ class adminView
     private $layout;
 
     private $extraVars = [];
+    private $extraTemplate = [];
 
     public function __construct(string $layout)
     {
         $this->templatesPath = (require __DIR__ . '/../../settings.php')['templates'];
         $this->layout = $this->templatesPath . '/' . ltrim($layout, '/');
+
+        $this->extraTemplate['style'] = '';
+        $this->extraTemplate['script'] = '';
     }
 
-    public function setVar(string $name, $value): void
+    public function setTemplate(string $name, $value): void
     {
-        $this->extraVars[$name] = $value;
+        $this->extraTemplate[$name] = $value;
     }
 
-    public function renderHtml(string $templateName, array $vars = [], int $code = 200): string
+    public function renderHtml(string $templateName, array $vars = [], int $code = 200): void
     {
         http_response_code($code);
 
         echo $this->getRenderedLayout($this->layout, [
-            'content' => $this->renderPHP($templateName, $vars)
+            'content' => $this->renderPHP($templateName, $vars),
+            'style' => $this->extraTemplate['style'],
+            'script' => $this->extraTemplate['script']
         ]);
     }
 
