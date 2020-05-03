@@ -3,7 +3,7 @@
 <div><a href="/articles/add">Создать статью</a></div>
 
 <?php foreach ($articles as $article): ?>
-    <h2><a href="/articles/<?= $article->getId() ?>"><?= $article->getName() ?></a></h2>
+    <h2><a href="/articles/<?= $article->getId() ?>"><?= e($article->getName()) ?></a></h2>
     <p><?= $article->getParsedText() ?></p>
     <hr>
 <?php endforeach; ?>

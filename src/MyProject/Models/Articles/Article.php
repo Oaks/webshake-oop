@@ -83,7 +83,7 @@ class Article extends ActiveRecordEntity
     public function getParsedText(): string
     {
         $parser = new \Parsedown();
-        return $parser->text($this->getText());
+        return $parser->text( htmlspecialchars( $this->getText() ));
     }
 
     public static function createFromArray(array $fields, User $author): Article

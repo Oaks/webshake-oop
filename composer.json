@@ -9,7 +9,8 @@
     "autoload": {
         "psr-4": {
             "MyProject\\": "src/MyProject/"
-        }
+        },
+        "files": ["src/functions/htmlesc.php"]
     },
     "require": {
         "erusev/parsedown": "^1.7"

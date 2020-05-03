@@ -21,7 +21,7 @@
                 <?php if (!empty($author))  {?>
                     <div><?= "{$comment->getCreatedAt()} {$author->getNickname()}" ?></div>
                 <?php }?>
-                <div id=<?="\"comment_{$comment->getId()}\""?> ><?=$comment->getComment()?></div>
+                <div id=<?="\"comment_{$comment->getId()}\""?> ><?=e($comment->getComment())?></div>
                 <?php if (!empty($user) && ($comment->isCommentator($user) || $user->isAdmin()) ) {?>
                     <a href=<?="\"/comments/{$comment->getId()}/edit\""?>>Edit</a>
                 <?php }?>

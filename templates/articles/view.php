@@ -1,5 +1,5 @@
 <?php include __DIR__ . '/../header.php'; ?>
-    <h1><?= $article->getName() ?></h1>
+    <h1><?= e($article->getName()) ?></h1>
     <p><?= $article->getParsedText() ?></p>
     <p>Автор: <?= "{$article->getAuthor()->getNickname()} {$article->getCreatedAt()}" ?></p>
 
