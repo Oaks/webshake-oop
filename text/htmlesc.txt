@@ -1,0 +1,21 @@
+ Template will always depend on outside variables, and with PHP being a dynamic language, there is no way to enforce at compile time that they will be there. So the first approach is probably fine; there are still a few problems though:
+
+The example does not take care of HTML-encoding the output, which means you have potential XSS vulnerabilities.
+If one of those variables isn't set, the code will raise a warning; you won't see whether the warning makes sense or not (maybe the variable is optional).
+A very straightforward approach is to write a function, preferably with a very short name, that takes care of both these; calling it _() seems to be a common convention. A simple version might look like this:
+
+function _($raw) {
+    if (isset($raw)) {
+        return htmlspecialchars($raw);
+    }
+}
+And then in your template, you'd do:
+
+<title><?= _($title) ?></title>
+More things to do with the _() function:
+
+Give it a second argument to allow overriding the htmlspecialchars call, for cases where you want to pass HTML into it rather than raw strings.
+Add type checking so that arrays and objects won't yield Array and Object, but rather something meaningful (or empty string).
+Add internationalization support (yet another argument).
+When in debug mode, print the name of the variable with some special formatting if it isn't defined. This way, you can see at a glimpse if there's anything wrong with the template.
+
